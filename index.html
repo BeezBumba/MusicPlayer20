@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#333333">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "config": "./config.js",
+            "metadata-utils": "./metadata-utils.js"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div id="import-screen" class="active">
+        <div class="container">
+            <h1>Music Player</h1>
+            <div class="import-container">
+                <div class="import-box">
+                    <label for="song-input" class="import-button">
+                        <i class="fas fa-music"></i> Import Music
+                    </label>
+                    <input type="file" id="song-input" accept="audio/*" multiple>
+                    <div class="import-feedback" id="song-import-feedback"></div>
+                </div>
+                <button id="start-button" class="start-button">Start Listening</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="player-screen">
+        <div class="player-container">
+            <div id="cover-art-container">
+                <img id="cover-art" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23333'/%3E%3Ccircle cx='100' cy='100' r='50' fill='%23555'/%3E%3Cpath d='M80 80 L80 120 L130 100 Z' fill='%23777'/%3E%3C/svg%3E" alt="Cover Art">
+            </div>
+            <div class="song-info">
+                <h2 id="song-title">No Song Selected</h2>
+                <p id="song-artist">Unknown Artist</p>
+            </div>
+            <div class="player-controls">
+                <div class="progress-container">
+                    <div id="progress-bar" class="progress-bar">
+                        <div id="progress" class="progress"></div>
+                    </div>
+                    <div class="time-display">
+                        <span id="current-time">0:00</span>
+                        <span id="total-time">0:00</span>
+                    </div>
+                </div>
+                <div class="controls-buttons">
+                    <button id="shuffle-button" class="control-button">
+                        <i class="fas fa-random"></i>
+                    </button>
+                    <button id="prev-button" class="control-button">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button id="play-button" class="control-button control-button-large">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="next-button" class="control-button">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <button id="repeat-button" class="control-button">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button id="show-playlist-button" class="show-playlist-button">
+            <i class="fas fa-list"></i>
+        </button>
+        <button id="layout-toggle-btn" class="layout-toggle-button">
+            <i class="fas fa-expand-arrows-alt"></i>
+        </button>
+        <div id="next-song-popup" class="next-song-popup hidden">
+            <span class="next-song-label">Next:</span>
+            <img id="next-song-cover" class="next-song-cover" src="" alt="Next song cover">
+            <div class="next-song-info">
+                <div id="next-song-title" class="next-song-title"></div>
+                <div id="next-song-artist" class="next-song-artist"></div>
+            </div>
+        </div>
+        <div id="playlist-container" class="hidden">
+            <div class="playlist-header">
+                <h3>Playlist</h3>
+                <button id="close-playlist-button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul id="playlist"></ul>
+            <div class="import-more">
+                <button id="add-more-button">Add More Songs</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audio-player"></audio>
+    
+    <script src="app.js" type="module"></script>
+    <script>
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker registered'))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "Music Player",
+  "short_name": "Music",
+  "description": "Personal music player for your local files",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#1DB954",
+  "icons": [
+    {
+      "src": "/icon192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon500.png", 
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
