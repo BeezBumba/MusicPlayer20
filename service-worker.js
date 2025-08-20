@@ -7,6 +7,8 @@ const ASSETS = [
   '/config.js',
   '/manifest.json',
   '/player-utils.js',
+  '/icon192.png',
+  '/icon500.png',
   '/metadata-utils.js'
 ];
 
